@@ -1,0 +1,429 @@
+<%- include('partials/header') %>
+<% if(usr) { 
+    const usrFullName = usr.firstName +" " + usr.lastName;
+    let usrLocation = "";
+    if(usr.country){
+        usrLocation = usr.country+", "+usr.city;
+    }
+
+    %>
+<section class="bg-light p-4">
+    <div class="container p-4">
+        <div class="container-profile p-4">
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
+                </ol>
+            </nav>
+
+            <div class="row gutters-sm-u-pro-set">
+                <div class="col-md-4 d-none d-md-block">
+                    <div class="card">
+                        <div class="card-body">
+                            <nav class="nav flex-column nav-pills nav-gap-y-1">
+                                <a href="#profile" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded  active">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user mr-2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Profile Information
+                                    </a>
+                                <a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>Account Settings
+                                </a>
+                                <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield mr-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Security
+                                </a>
+                                <a href="#notification" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell mr-2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>Notification
+                                </a>
+                                <a href="#billing" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>Billing
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-u-pro-set">
+                        <!--div class="card-header border-bottom mb-3 d-flex d-md-none">
+                            <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist">
+                                <li class="nav-item">
+                                    <a href="#profile" data-toggle="tab" class="nav-link has-icon active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#account" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#security" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#notification" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#billing" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></a>
+                                </li>
+                            </ul>
+                        </div-->
+                        <div class="card-body-u-pro-set tab-content">
+                            <div class="tab-pane active" id="profile">
+                                <h6>PROFILE INFORMATION</h6>
+                                <hr>
+                                <form action="/profile" enctype="multipart/form-data" method="POST" id="profileInfo">
+                                    <div class="row"> 
+                                        <div class="col d-flex justify-content-center">
+                                            <div
+                                              id="photoBox"
+                                              class="bg-image  w-50 d-flex justify-content-center"
+                                              style="
+                                                background-image: url('/photo/<%=usr.photo %>');
+                                                height: 12em;
+                                              "
+                                            ></div>
+                                        </div>
+                                    </div>
+                                            <div class="d-flex justify-content-center mt-3">
+                                              <label for="photoInput" class="custom-file-upload profile-btn simple-btn ">
+                                                Upload Profile Picture</Picture>
+                                              </label>
+                                              <input type="file" id="photoInput" name="photo" style="display: none;" onchange="onPhotoChange()"/>
+                                            </div>
+                        
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name</label>
+                                        <input type="text" class="form-control" id="fullName" aria-describedby="fullNameHelp" placeholder="Enter your fullname" value="<%=usrFullName%>" readonly>
+                                        <small id="fullNameHelp" class="form-text text-muted">Your name may appear around here where you are mentioned.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profileEmail">Email</label>
+                                        <% if(usr.email) { %>
+                                            <input type="text" class="form-control" id="profileEmail" name="email" aria-describedby="fullNameHelp" placeholder="Enter your email" value="<%=usr.email%>" readonly>
+                                            <small id="fullNameHelp" class="form-text text-muted">Your email has been verified. Contact technical support to change</small>
+                                        <% } else { %>
+                                            <input type="text" class="form-control" id="profileEmail" name="email" aria-describedby="fullNameHelp" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Enter your email" required>
+                                        <% }%>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profilePhone">Phone number</label>
+                                        <input type="tel" class="form-control" id="profilePhone" name="phone" placeholder="Enter your phone number" value="<%=usr.phone%>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profilePhone">LinkedIn Profile Link</label>
+                                        
+                                        <% if(usr.linkedInProfileUrl) { %>
+                                            <input type="url" class="form-control" id="linkedinProfileLink" name="linkedin_link" placeholder="Enter your location" value="<%=usr.linkedInProfileUrl%>" readonly>
+                                        <% } else { %>
+                                            <input type="url" class="form-control" id="linkedinProfileLink" name="linkedin_link" placeholder="Enter your LinkedIn profile link" >
+                                        <% } %>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="location">Location</label>
+                                        <% if(usrLocation) { %>
+                                            <input type="text" class="form-control" id="location" placeholder="Enter your location" value="<%=usrLocation%>" readonly>
+                                        <% } else { %>
+                                            <div class="row mt-1">
+                                                <div class="col mb-2">
+                                                    <div class="form-outline  ">
+                                                        <input type="text" id="updateAddress" class="form-control" placeholder="Address" name="address" required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-1">
+                                              <div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-2">
+                                                  <!-- Country input -->
+                                                  <div class="form-outline  ">
+                                                    <select name="country" id="updateCountry" class="form-control" aria-label="Select Country" style="display: inline;" required/>
+                                                        <option value="">Select Country</option>
+                                                        <% countries.forEach(country => { %> 
+                                                          <option value="<%= country.name %>"> <%= country.name %></option>
+                                                          <% }); %>
+                                                      </select>
+                                                    </div>
+                                              </div>
+                                              <div class="col-lg-6 col-md-6 col-sm-12 col-12 ">
+                                                  <!-- City input -->
+                                                  <div class="form-outline  ">
+                                                    <select class="form-control" aria-label="Select City"  style="display: inline;" id="updateCity" name="city" required>
+                                                        <option value="">Select City</option>
+                                                      </select>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <% } %>
+                                    </div>
+                                    <div class="form-group small text-muted">
+                                        All of the fields on this page can be edited at any time, and by filling them out, you're giving us consent to share this data wherever your user profile appears.
+                                    </div>
+                                    <div class="d-inline-block mx-auto">
+                                        <button type="submit" class="simple-btn">Update Profile</button>
+                                        <button onClick="reset()" type="reset" class="simple-btn ml-3">Reset Changes</button>
+
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="account">
+                                <h6>ACCOUNT SETTINGS</h6>
+                                <hr>
+                                <form>
+                                    <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter your username" value="<%=usr.username%>" readonly>
+                                    <!--small id="usernameHelp" class="form-text text-muted">After changing your username, your old username becomes available for anyone else to claim.</small>
+                                    <button type="button" class="simple-btn mt-2" onClick="" id="updateUsername">Update username</button-->
+                                    </div>
+                                    <div class="form-group ml-1">
+                                        <label for="account-type">Account type</label>
+                                        <div class="row mt-0">
+                                            <div class="col-lg-6 col-md6 col-sm-12 col-12">
+                                                <input type="text" class="form-control" id="accountType" name="accountType" aria-describedby="usernameHelp" placeholder="Enter your username" value="<%=usr.accountType%>" readonly>
+                                            </div>
+                                            <div class="col-lg-6 col-md6 col-sm-12 col-12">
+                                                <a role="button" href="/join-as-pro" class="simple-btn btn" > Join as provider</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                    <label class="d-block text-danger mt-3"><b>Delete Account</b></label>
+                                    <p class="text-muted font-size-sm mt-1">Once you delete your account, there is no going back. Please be certain.</p>
+                                    </div>
+                                    <button class="btn btn-danger" type="button">Delete Account</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="security">
+                            <h6>SECURITY SETTINGS</h6>
+                            <hr> 
+
+                            <div class="form-group">
+                            <span class="error_message" id="message"></span>
+                            <label class="d-block">Change Password</label>
+                            <input type="password" id="currentPass" name="currentPass" class="form-control" placeholder="Enter current password">
+                            <input type="password" id="newPass" class="form-control mt-1" placeholder="New password">
+                            <input type="password" id="newPassConf" class="form-control mt-1" placeholder="Confirm new password">
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                            <label class="d-block">Two Factor Authentication</label>
+                            <div class="d-flex">
+                                <span class="dark-text big mr-4 ">Enable two factor authentication</span>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <p class="small text-muted mt-2">Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.</p>
+                            </div>
+                            <hr>
+                            <div class="form-group mb-0">
+                            <label class="d-block">Sessions</label>
+                            <p class="font-size-sm text-secondary">This is a list of devices that have logged into your account. Revoke any sessions that you do not recognize.</p>
+                            <ul class="list-group list-group-sm">
+                            <li class="list-group-item has-icon">
+                            <div>
+                            <h6 class="mb-0">San Francisco City 190.24.335.55</h6>
+                            <small class="text-muted">Your current session seen in United States</small>
+                            </div>
+                            <button class="btn btn-light btn-sm ml-auto" type="button">More info</button>
+                            </li>
+                            </ul>
+                            </div>
+                            <div class=" mt-2 mx-auto mb-2">
+                                <button type="button" class="simple-btn" onClick="changePassword()" >Save changes</button>
+                            </div>
+                            </div>
+                            <div class="tab-pane" id="notification">
+                            <h6>NOTIFICATION SETTINGS</h6>
+                            <hr>
+                            <form>
+                            <div class="form-group">
+                            <label class="d-block mb-0">Security Alerts</label>
+                            <div class="small text-muted mb-3">Receive security alert notifications via email</div>
+                            <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                            <label class="custom-control-label" for="customCheck1">Email each time a vulnerability is found</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
+                            <label class="custom-control-label" for="customCheck2">Email a digest summary of vulnerability</label>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="d-block mb-0">SMS Notifications</label>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="requestUpdatesSMS" checked="">
+                                    <label class="custom-control-label" for="requestUpdatesSMS">Send me text messages for my servie requests updates.</label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="opportunitiesSMS" checked="">
+                                    <label class="custom-control-label" for="opportunitiesSMS">Send me text messages for opportunities.</label>
+                                </div>
+                             
+                            </div>
+                            </form>
+                            </div>
+                            <div class="tab-pane justify-content-center" id="billing">
+                            <h6 class="mx-auto">BILLING SETTINGS</h6>
+                            <hr>
+                            <form>
+                            <div class="form-group">
+                            <label class="d-block mb-0">Payment Method</label>
+                            <div class="small text-muted mb-3">You have not added a payment method</div>
+                            <button class="simple-btn" type="button">Add Payment Method</button>
+                            </div>
+                            <div class="form-group mb-0">
+                            <label class="d-block">Payment History</label>
+                            <div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">You have not made any payment.</div>
+                            </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.getElementById('updateCountry').onchange = function(){
+      filename = "./data/cities/" + document.getElementById('updateCountry').value +".json";
+      $.getJSON(filename, function(data) {
+        var items = [];
+        items.push('<option value="">Select City</option>');
+        $.each(data, function( key, val ) {
+              items.push('<option value="' + val.name + '">' + val.name+ '</option>');
+          });
+
+          document.getElementById('updateCity').innerHTML = items;
+      });
+    
+  }
+</script>
+
+<script>
+
+    function reset(){
+        $( "#profileInfo" ).load( "/profile #profileInfo" );
+    }
+    
+    const changePassword = async()=> {
+  
+    const oldPass = document.getElementById("currentPass").value;
+    const newPass = document.getElementById("newPass");
+    const newPassConf = document.getElementById("newPassConf");
+    const message = document.getElementById("message");
+
+    if (newPass.value != newPassConf.value) {
+    //alert("Passwords Do not match");
+        newPass.classList.add("invalid");
+        newPassConf.classList.add("invalid");
+        message.innerHTML = "Passwords do not match!";
+        return;
+    }
+    if(newPass.value.length < 6){
+        newPass.classList.add("invalid");
+        newPassConf.classList.add("invalid");
+        message.innerHTML = "Password is too short, enter a longer password.";
+        return;
+    }
+    else{
+        const specialChars = "!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?`~";
+        let letterBoolean = newPass.value.match(/[a-z]/i);
+        let numBoolean = false;
+        for (let i = 0; i < newPass.value.length; i++) {
+            if(!isNaN(newPass.value[i]))
+            numBoolean = true;
+        }
+
+        let specialCharBoolean = false;
+            for (let i = 0; i < newPass.value.length; i++) {
+            for (let j = 0; j < specialChars.length; j++) {
+                if (newPass.value[i] == specialChars[j]) {
+                specialCharBoolean = true;
+                }
+            }
+        }
+        if(!letterBoolean){
+            newPass.classList.add("invalid");
+            newPassConf.classList.add("invalid");
+            message.innerHTML = "Include at least letter in password.";
+            return;
+        }
+        if(!numBoolean){
+            newPass.classList.add("invalid");
+            newPassConf.classList.add("invalid");
+            message.innerHTML = "Include at least a number in your password.";
+            return;
+        }
+        if(!specialCharBoolean){
+            newPass.classList.add("invalid");
+            newPassConf.classList.add("invalid");
+            message.innerHTML = "Include at least a special char in your password";
+            return;
+        }
+    }
+
+    requestData = {
+        accountPassword: oldPass,
+        newPassword: newPass.value
+    }
+
+    _postData('/update-password', requestData )
+        .then(async response => {
+        if(response.status == 200){
+            message.classList.remove('error_message');
+            message.classList.add('success_message');
+            message.innerHTML = "Password has been successfully updated!";
+        }
+        else{
+            message.innerHTML = "Current password is not correct.";
+        }
+        
+        }).catch(err => {
+        console.log(err) // Handle errors
+        message.innerHTML = "Current password is not correct. ";
+        });
+    }
+
+    async function _postData(url = '', data = {}) {
+    const response = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(data)
+    });
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.indexOf("application/json") !== -1) {
+        return response.json();
+    }else{ return response;}
+    }
+
+    
+const onPhotoChange = () => {
+  const photoInput = document.getElementById('photoInput');
+  const photoBox = document.getElementById('photoBox');
+
+  const photoURL = URL.createObjectURL(photoInput.files[0]);
+
+  const reader = new FileReader();
+  reader.addEventListener('load', (event) => {
+    console.log(event.target);
+    photoBox.style.backgroundImage = `url(${event.target.result})`;
+  });
+
+  reader.readAsDataURL(photoInput.files[0]);
+}
+</script>
+
+
+<% }%>
+<%- include('partials/footer') %>
+
+
+

@@ -1,0 +1,59 @@
+<%- include('partials/header') %>
+<section class="bg-light mt-4 pt-4">
+    <div class="container p-4">
+      <div class="page-content container container-profile p-4 note-has-grid">
+        <ul class="nav nav-pills p-3 bg-white mb-3 rounded-pill align-items-center">
+        <li class="nav-item" onClick="getApplications('active')">
+          <a href="javascript:void(0)" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2 active" id="active-ja">
+            <i class="icon-layers mr-1"></i><span class="d-none d-md-block">Active</span>
+          </a>
+        </li>
+        <li class="nav-item" onClick="getApplications('hired')">
+        <a href="javascript:void(0)" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2" id="hired-ja"> <i class="icon-briefcase mr-1"></i><span class="d-none d-md-block">Hired</span></a>
+        </li>
+        <li class="nav-item" onClick="getApplications('cancelled')">
+        <a href="javascript:void(0)" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2" id="cancelled-ja"> <i class="icon-share-alt mr-1"></i><span class="d-none d-md-block">Cancelled</span></a>
+        </li>
+        <li class="nav-item" onClick="getApplications('all')">
+        <a href="javascript:void(0)" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2" id="all-ja"> <i class="icon-tag mr-1"></i><span class="d-none d-md-block">All</span></a>
+        </li>
+        
+        </ul>
+        <div class="tab-content bg-transparent px-4">
+        <div id="applications-container" class="row p-3">
+          <% if (ja.length > 0) { 
+            const classes = ["bg-soft-danger", "bg-soft-base", "bg-soft-warning", "bg-soft-success", "bg-soft-info"];
+            for(let i = 0; i < ja.length; i++){ %>
+            <div class="col-lg-4 col-md-6 col-12 mt-1 pt-2">
+                <div class="card border-0 bg-light-job rounded-job shadow-job">
+                    <div class="card-body p-4">
+                        
+
+                    <span class="btn btn-sm <%=classes[Math.floor(Math.random() * 5)]%> cat-job float-md-right mb-3 mb-sm-0"><%=ja[i].requestCategory %></span>
+                    <h5><%=ja[i].requestTitle%></h5>
+                    <div class="mt-3">
+                        <span class="d-block job-details"><b class="fa fa-money mr-2" aria-hidden="true"></b>  Budget: <%=ja[i].budget%></span>
+                        <span class="d-block job-details"><b class="fa fa-briefcase mr-2" aria-hidden="true"></b> Deadline: <%=ja[i].deadline%></span>
+                    </div>
+                    <div class="mt-3 border-bottom pb-4 d-flex ">
+                        <a class="btn-job btn-primary-job-inv" href="/job-application/<%=ja[i]._id%>">View application details</a>
+                        
+                    </div>
+                       
+                    </div>
+                
+                </div>
+            </div>
+          <% } } else {%>
+            <div class=" col d-flex justify-content-center align-items-center"><h6 class="text-light text-muted">No Job application found!</h6></div>
+          <% } %>
+        </div>
+      </div>
+      </div>
+
+    </div>
+</section>
+
+<script src="js/manageJobApplications.js"></script>
+
+<%- include('partials/footer') %>

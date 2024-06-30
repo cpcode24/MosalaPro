@@ -1,0 +1,453 @@
+
+
+<%- include('partials/header') %>
+    
+<section class="bg-light p-4">
+    <div class="container mt-page">
+    <div class="row">
+        <div class="col-lg-12 card-margin">
+            <div class="card search-form">
+                <div class="card-body p-0">
+                    <form id="search-form">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                        <select class="form-control" id="country_search" name="country_search">
+                                            <option selected>Country</option>
+                                            <% countries.forEach(country => { %> 
+                                                <option name="<%= country.name %>" value="<%= country.name %>"> <%= country.name %></option>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-md-3 col-sm-12 p-0">
+                                        <select class="form-control" aria-label="Select City"  style="display: inline;" id="city_search" name="city_search" >
+                                            <option selected>Select City</option>
+                                          </select>
+                                    </div>
+                                    <div class="col-lg-6 col-md-3 col-sm-12 p-0">
+                                        <input type="text" placeholder=" Keyword... eg. Architect" class="form-control" id="search" name="search">
+                                    </div>
+                                    <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+                                        <button type="submit" class="search-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-margin">
+                <div class="card-body">
+                    <div class="row search-body">
+                        <div class="col-lg-12">
+                            <div class="search-result">
+                                <div class="result-header">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <div class="records">Popular professionals </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="result-actions">
+                                                <div class="result-sorting">
+                                                    <span>Sort By:</span>
+                                                    <select class="form-control border-0" id="exampleOption">
+                                                        <option value="1">Relevance</option>
+                                                        <option value="2">Names (A-Z)</option>
+                                                        <option value="3">Names (Z-A)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="result-views">
+                                                    <a href="/find-services"><button type="button" class="btn btn-soft-base btn-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
+                                                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                                                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                                                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                                                            <line x1="3" y1="6" x2="3" y2="6"></line>
+                                                            <line x1="3" y1="12" x2="3" y2="12"></line>
+                                                            <line x1="3" y1="18" x2="3" y2="18"></line>
+                                                        </svg>
+                                                    </button></a>
+                                                    <a href="#"><button type="button" class="btn btn-soft-base btn-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                                                            <rect x="3" y="3" width="7" height="7"></rect>
+                                                            <rect x="14" y="3" width="7" height="7"></rect>
+                                                            <rect x="14" y="14" width="7" height="7"></rect>
+                                                            <rect x="3" y="14" width="7" height="7"></rect>
+                                                        </svg>
+                                                    </button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="result-body">
+
+                        <div class="row">
+                        <div class="col-lg-3">
+                        <div class="text-center card-box-pro">
+                        <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                        <h6>Freddie J. Plourde</h6>
+                        <span class="text-muted ">Techinician</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(44)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                        <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                        <div class="mt-4">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="text-center card-box-pro">
+                            <div class="member-card pt-2 pb-2">
+                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                            <div class="">
+                            <h6>Christopher Gall</h6>
+                            <span class="text-muted ">Painter</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm rating-star-color "></b></li><span>(24)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                            <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                            <div class="mt-4">
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3">
+                        <div class="text-center card-box-pro">
+                        <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                        <h6>Julie L. Arsenault</h6>
+                        <span class="text-muted ">Data Analyst</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(34)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                        <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                        <div class="mt-4">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                        <div class="text-center card-box-pro">
+                        <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                        <h6>Christopher Gall</h6>
+                        <span class="text-muted ">Civil Engineer</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(34)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                        <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                        <div class="mt-4">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        </div>
+
+                        <div class="row">
+                        <div class="col-lg-3">
+                        <div class="text-center card-box-pro">
+                        <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                        <h6>Joseph M. Rohr</h6>
+                        <span class="text-muted ">Architect</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(34)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                        <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                        <div class="mt-4">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                        <div class="text-center card-box-pro">
+                        <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                        <h6>Mark K. Horne</h6>
+                        <span class="text-muted ">Accountant</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(34)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                        <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                        <div class="mt-4">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                        <div class="text-center card-box-pro">
+                        <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                        <h6>James M. Fonville</h6>
+                        <span class="text-muted ">Lawyer</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(64)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                        <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                        <div class="mt-4">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="text-center card-box-pro">
+                            <div class="member-card pt-2 pb-2">
+                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                            <div class="">
+                            <h6>Christopher Gall</h6>
+                            <span class="text-muted ">Security Agent</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas "></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm rating-star-color"></b></li><span>(45)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                            <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                            <div class="mt-4">
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                        <div class="col-lg-3">
+                        <div class="text-center card-box-pro">
+                        <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                            <h6>Abdul Karim</h6>
+                            <span class="text-muted ">Driver</span>
+                            <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                                <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                                <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                                <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                                <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                                <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(34)</span>
+                            </ul>
+                            </div>
+                            <ul class="social-links list-inline">
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                            <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                            </ul>
+                        <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                        <div class="mt-4">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="text-center card-box-pro">
+                            <div class="member-card pt-2 pb-2">
+                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                            <div class="">
+                            <h6>Christopher Gall</h6>
+                            <span class="text-muted ">Video Editor</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(34)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                            <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                            <div class="mt-4">
+                            
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+
+                        <div class="col-lg-3">
+                        <div class="text-center card-box-pro">
+                        <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                        <h6>Mathias L. Lassen</h6>
+                        <span class="text-muted ">Engineer</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(27)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                        <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                        <div class="mt-4">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                        <div class="text-center card-box-pro">
+                        <div class="member-card pt-2 pb-2">
+                        <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                        <div class="">
+                        <h6>Alfred M. Bach</h6>
+                        <span class="text-muted ">Tutor</span>
+                        <ul class="rating " data-mdb-toggle="rating" data-mdb-readonly="true" data-mdb-value="3"> 
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="fa-star fa-sm rating-star-color fas active"></b></li>
+                            <li class="d-inline"><b class="far fa-star fa-sm rating-star-color "></b></li>
+                            <li class="d-inline"> <b class="far fa-star fa-sm "></b></li><span>(34)</span>
+                        </ul>
+                        </div>
+                        <ul class="social-links list-inline">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><b class="fa fa-facebook"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><b class="fa fa-linkedin"></b></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Whatsapp"><b class="fa fa-whatsapp"></b></a></li>
+                        </ul>
+                        <button type="button" class="btn button-primary mt-2 ">Message Now</button>
+                        <div class="mt-4">
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+                        </div>
+
+                        <div class="row">
+                        <div class="col-12">
+                        <div class="text-right">
+                        <ul class="pagination pagination-split mt-0 float-right">
+                        <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span> <span class="sr-only">Previous</span></a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span> <span class="sr-only">Next</span></a></li>
+                        </ul>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+ </section>
+
+ <%- include('partials/footer') %>

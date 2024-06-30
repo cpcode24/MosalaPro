@@ -1,0 +1,139 @@
+
+<%- include('partials/header') %>
+<section class="bg-light p-4">
+    <div class="container p-4">
+        <div class="custom-container">
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/myrequests">My service requests</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><%=request.requestTitle %></li>
+                </ol>
+            </nav>
+            <div class="row mt-1">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                    <div class="card-u-pro-set p-4">
+                        <div class="card-body-u-pro-set tab-content px-4">
+                            <div class="tab-pane active" id="request">
+                                <h5><%=request.requestTitle %></h5>
+                                <span id="reqMessage" class=""></span>
+                                <div class="form-group mt-4">
+                                    <label for="fullName">Request title</label>
+                                    <input type="text" class="form-control" id="requestTitle" aria-describedby="Requets title" placeholder="Enter request title" maxlength="70" value="<%=request.requestTitle%>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="requestDesc">Request description</label>
+                                    <textarea type="text" class="form-control" id="requestDesc" name="requestDesc" aria-describedby="requestDesc" placeholder="Enter request description"><%=request.requestDescription%></textarea>
+                                    <small id="requestDesc" class="form-text text-muted">Enter at least 40 characters.</small>
+                                </div>
+                                <div class="form-group">
+                                        <label for="requestCat">Category</label>
+                                        <select class="form-control" aria-label="Select Category" name="category" id="requestCat" style="display: inline;">
+                                            <option selected><%=request.requestCategory%></option>
+                    
+                                            <% if(cats){ cats.forEach(cat=>{ %>
+                                              <option value="<%=cat.name %>"><%=cat.name %></option>
+                                            <% });} %>
+                                          </select>
+                                  </div>
+                                <div class="form-group">
+                                    <label for="budget">Budget</label>
+                                    <input type="number" class="form-control" id="requestBudget" name="budget" placeholder="Enter request budget" value="<%=request.budget%>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="budget">Deadline</label>
+                                    <input type="tel" class="form-control" id="requestDeadline" name="deadline" placeholder="Enter request budget" value="<%=request.deadline%>">
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label for="budget">Files</label>
+                                    <div class="row mt-1">
+                                
+                                        <% if (request.files.length == 0){ %>
+                                            <!--Do something-->
+                                        <% } else { %>
+                                            <% let j = 0; request.files.forEach(file=>{ j++; %>
+        
+                                            <!--span class="d-none" id="file-"><%= file%></a></p-->
+                                            <div title="Download file <%=j%>" data-toggle="tooltip" data-placement="bottom"  class=" col-sm-4 col-lg-2 tooltips cursor mb-4" >
+                                            <!--span class="job-details"><%=request.files.length%></span-->
+                                                <!-- Post Modern-->
+                                                <div class="d-flex justify-content-center px-4 px-auto" onClick="downloadFile('<%= file%>')" >
+                                                    <b class="fa fa-file-text-o fa-5x mb-1 file-icon" aria-hidden="true"></b>
+                                                    <span class="post-modern-time">  <%=request.requestTitle%>'s file <%=j%></span>
+                                                    
+                                                </div>
+                                                
+                                              </div>
+        
+                                            <% }); } %>
+                                    </div>
+                                    <label for="file-input" class="attach-btn">
+                                        <i class="fas fa-paperclip"></i> Attach requirement documents
+                                    </label>
+                                    <input id="file-input" name="file" type="file" style="display: none;" >        
+                                </div>
+                                <% if(request.status == "active") {%>
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button type="submit" class="btn-job btn-primary-job-inv-dgr mr-3" href="#cancelRequestConfModalCta" data-toggle="modal" data-caption-animate="fadeInUp" >Cancel request</button>
+                                        <button onClick ="onRequestSubmit('<%=request._id%>')" class="btn-job btn-primary-job-inv">Save changes</button>
+                                        <button onClick="reset('<%=request._id%>')" type="reset" class="btn-job btn-primary-job-inv-blue ml-3">Reset Changes</button>
+                                        
+                                    </div>
+                                <% } else if(request.status == "cancelled") { %>
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button onClick="resubmit('<%=request._id%>')" type="submit" class="btn-job btn-primary-job-inv-dgr mr-3">Resubmit</button>
+                                    </div>
+                                <% } else if(request.status == "booked") { %>
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button type="submit" class="btn-job btn-primary-job-inv-dgr mr-3" href="#cancelUserBookingConfModalCta" data-toggle="modal" data-caption-animate="fadeInUp" >Cancel booking</button>
+                                        <button onClick ="onRequestSubmit('<%=request._id%>')" class="btn-job btn-primary-job-inv">Save changes</button>
+                                        <button onClick="reset('<%=request._id%>')" type="reset" class="btn-job btn-primary-job-inv-blue ml-3">Reset Changes</button>
+                                        
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12 col-sm-12 col">
+                    <div class="container shadow-sm mb-5 pb-2 bg-white rounded ">
+                      <div class="row">
+                        <div class="w-100 d-flex justify-content-center align-items-center border-bottom border-dark p-3">
+                        <% if(request.status == "active" ) {%>
+                          <h6>Applicants</h6>
+                        <% } else { %>
+                          <h6>Service provider</h6>
+                        <% } %>
+                        </div>
+                      </div>
+                      <% if(interestedPros.length > 0) { interestedPros.forEach(pro=>{ %>
+                       <a href="/applicant?p=<%=pro._id%>&j=<%=request._id%>%>"> <div class="d-flex justify-content-center mt-2 p-2 applicant" tooltip="View provider profile">
+                            <div class="thumb-lg member-thumb mr-4"><img src="/photo/<%= pro.photo %>" alt="profile-image"></div>
+                            <span class="my-auto text-primary"><b><%= pro.firstName %> <%= pro.lastName %> </b><br> <span><%= pro.username %></span></span>
+
+                      </div></a>
+                      <% }); } else{ %>
+                        <div class="d-flex justify-content-center mt-2 p-4"><span>No application found.</span></div>
+                      <% } %>
+
+                      <% if(request.status == "in-progress" || request.status == "booked") { %> 
+                        <div class="d-flex justify-content-center"><a href="/invoice?sr=<%=request._id%>&p=<%=interestedPros[0]._id%>">
+                            <button type="reset" class="btn-job btn-primary-job-inv-blue ml-3">View Invoice</button></a>
+                        </div>
+                      <% } else if(request.status == "active" && interestedPros.length > 2) { %>
+                        <div class="d-flex justify-content-center"><a href="/applicants">
+                            <button type="reset" class="btn-job btn-primary-job-inv-blue ml-3 my-4">View All applicants</button></a>
+                        </div>
+                      <% } %>  
+                      </div>
+                      </div>
+            </div>
+        </div>
+</div>
+</section>
+<%- include('partials/cancelUserBookingConfModal') %>
+<%- include('partials/cancelRequestConfModal') %>
+<script src="js/manageRequest.js"></script>
+<%- include('partials/footer') %>
+                                    

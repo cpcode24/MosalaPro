@@ -1,0 +1,110 @@
+
+<%- include('partials/header') %>
+<section class="bg-light pt-5">
+    <div class="container p-4">
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/applications">Job Applications</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><%=job.requestTitle%></li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                <div class="container shadow-sm p-4 mb-5 bg-white rounded pt-1 mb-1">
+                    <div class="mt-1">
+                        <h5 class="mt-1 mb-1 text-center">   <%=job.requestTitle%>  </h5>
+                        </div>
+                                <div class="modal-container-job px-4">
+                                    <span id="mess" class="error_message"></span>
+                                    <div class="row  mt-3">
+                                        <div class="col">
+                                            <h6 class="border-bottom mb-1">Category</h6><span class="job-details pl-2 mt-4"><%=job.requestCategory %></span> 
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <h6 class="border-bottom mb-1">Budget</h6> <span class="job-details pl-2 mt-4">$ <%=job.budget%></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <h6 class="border-bottom mb-1">Deadline</h6><span class="job-details pl-2 mt-4"><%=job.deadline%></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <h6 class="border-bottom mb-1">Description</h6>
+                                            <span class="job-details pl-2"><%=job.requestDescription%></span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <h6 class="border-bottom mb-3">Files</h6>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mt-1">
+                                        
+                                        <% if (job.files.length == 0){ %>
+                                            <div class="col">
+                                                <span class="job-details pl-2"> This service request does not have attachments.</span>
+                                            </div>
+                                        <% } else { %>
+                                            <% let j = 0; job.files.forEach(file=>{ j++; %>
+
+                                            <!--span class="d-none" id="file-"><%= file%></a></p-->
+                                            <div title="Download file <%=j%>" data-toggle="tooltip" data-placement="bottom"  class=" col-sm-4 col-lg-2 tooltips cursor mb-4" >
+                                            <!--span class="job-details"><%=job.files.length%></span-->
+                                                <!-- Post Modern-->
+                                                <div class="d-flex justify-content-center px-auto" onClick="downloadFile('<%= file%>')" >
+                                                    <b class="fa fa-file-text-o fa-5x mb-1 file-icon" aria-hidden="true"></b>
+                                                    <span class="post-modern-time">  file <%=j%></span>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+
+                                            <% }); } %>
+                                    </div>
+                                    <div class="row pb-4 mb-4 mt-3">
+                                        <div class="col">
+                                            <h6 class="border-bottom mb-2">Applied on</h6>
+                                            <span class="job-details pl-2"><%= job.createdAt.getUTCMonth() + 1 %>/<%= job.createdAt.getUTCDate()%>/<%= job.createdAt.getUTCFullYear() %></span>
+                                        </div>
+                                    </div>
+                                        <p class="post-modern-text mt-1 border-top">This application has not been viewed by the request owner, you will be notified when it's viewed.</p>
+                                    </div>
+                                    <% if(job.appStatus == "active") { %>
+                                        <div class="p-4 d-flex justify-content-center"><button class=" btn-danger"  href="#cancelApplicationConfModalCta" data-toggle="modal" data-caption-animate="fadeInUp">Cancel my application</button></div>
+                                    <% } %>
+                                    <!--div class="p-4 d-flex justify-content-center"><button class=" btn-danger">Provide a quotation</button></div-->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col">
+                        <div class="container shadow-sm mb-5 pb-1 bg-white rounded ">
+                          <div class="row">
+                            <div class="w-100 d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+                              <h6>Service requested by</h6>
+                            </div>
+                          </div>
+                            <div class="d-flex justify-content-center mt-2 p-4">
+                                  <div class="thumb-lg member-thumb mr-4"><img src="/photo/<%= postedBy.photo %>" alt="profile-image"></div>
+                                  <span class="my-auto text-large"><%= postedBy.firstName %> <%= postedBy.lastName %> <br> <span><%= postedBy.username %></span></span>
+                                  
+                            
+                            </div>
+              
+                          </div>
+                    </div>
+                </div>
+            </div>
+</section>
+
+<%- include('partials/cancelApplicationConfModal') %>
+
+<script src="js/jobApplication.js"></script>
+<%- include('partials/footer') %>

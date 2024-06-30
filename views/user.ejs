@@ -1,0 +1,114 @@
+<%- include('partials/header') %>
+<section class="bg-light p-4 ">
+  <div class="container p-4">
+<div style="background-color: rgba(240, 240, 240, 0.425);" class="h-100 pt-4">
+  <div class="container text-secondary"> 
+    <div class="row">
+      <div class="col-8">
+        <div class="container shadow-sm p-4 mb-5 bg-white rounded ">
+          <div class="row">
+            <div class="col-4">
+              <div
+                class="bg-image  w-100"
+                style="
+                  background-image: url('/photo/<%=usr.photo %>');
+                  height: 300px;
+                "
+              ></div>
+              <p >$<%=usr.rate %> / USD / hour</p>
+              <p><%=usr.city %>, <span class="profile-country"><%=usr.country %></span></p>
+              <p>It's currently 11:12 PM here</p>
+              <p>Joined <%= new Date(usr.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></p>
+              <p>0 Recommendations</p>
+            </div>
+            <div class="col-8">
+              <div class="d-flex justify-content-between w-100">
+                <h5><%=usr.firstName %> <%=usr.lastName %></h5>
+                <a href="/user-edit" class="profile-btn">Edit Profile</a>
+              </div>
+              <p><%=usr.role %></p>
+              <p>***** 5.0 (0 reviews) </p>
+              <div class="d-flex w-100">
+                <div>
+                    <div><span class="n-a">N/A</span> Jobs Completed</div>
+                    <div><span class="n-a">N/A</span> On Time</div>
+                  </div>                
+                  <div class="ml-5">
+                    <div><span class="n-a">N/A</span> On Budged</div>
+                    <div><span class="n-a">N/A</span> Repeat Hire Rate</div>
+                  </div>
+              </div>
+              <p><%=usr.description %></p>
+            </div>
+          </div>
+        </div>
+        <div class="container shadow-sm mb-5 bg-white rounded ">
+          <div class="row">
+            <div class="p-3 w-100 d-flex justify-content-between border-bottom border-dark">
+              <h5>Portfolio Items</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="container shadow-sm mb-5 pb-1 bg-white rounded ">
+          <div class="row">
+            <div class="w-100 d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+              <h6>Verification</h6>
+            </div>
+          </div>
+            <div class="d-flex justify-content-between align-items-center my-3">
+              <span>Preferred Freelancer</span>
+              <span class="text-primary">Join</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center my-3">
+              <span>Identity Verified</span>
+              <span class="text-primary">Verify</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center my-3">
+              <span>Payment Verified</span>
+              <span class="text-primary">Verify</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center my-3">
+              <span>Email Verified</span>
+              <span class="text-primary">Verify</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center my-3">
+              <span>Facebook Verified</span>
+              <span class="text-primary">Verify</span>
+            </div>
+          <p></p>
+        </div>
+        <div class="container shadow-sm mb-5 pb-3 bg-white rounded ">
+          <div class="row">
+            <div class="w-100 d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+              <h6>Certifications</h6>
+            </div>
+          </div>
+          <p class="text-center">You don't have any certifications yet.</p>
+        </div>
+        <div class="container shadow-sm mb-5 pb-3 bg-white rounded ">
+          <div class="row">
+            <div class="w-100 d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+              <h6>Skills</h6>
+            </div>
+          </div>
+          <div class="mt-2">
+
+          <% usr.skills.forEach(skill => { %> 
+            <p><%= skill %></p>
+          <% }); %>
+        </div>
+
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+</div>
+
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>

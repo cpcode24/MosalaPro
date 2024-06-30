@@ -1,0 +1,344 @@
+<%- include('partials/header') %>
+
+<section class="bg-light p-4">
+   <div class="container p-4">
+
+    <div class="row">
+
+        <div class="col p-4">
+
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Notifications</li>
+                </ol>
+            </nav>
+            <% let unreads = [];
+                let reads = [];
+                notifications.forEach(notif=>{
+                if(notif.status == "unread")
+                    unreads.push(notif);
+                else
+                    reads.push(notif);
+                });
+                let lim = 0; let rlim = 0;
+                if(unreads.length <= 4)
+                    lim = unreads.length;
+                else    
+                    lim = 4;
+                if(reads.length <= 4)
+                    rlim = reads.length;
+                else    
+                    rlim = 4; %>
+            <div class="box shadow-sm rounded bg-white mb-3">
+            <div class="box-title border-bottom p-3">
+            <h6 class="m-0">Recent</h6>
+            </div>
+            <div class="box-body p-0" id="unreadNotifs">
+                <% if(unreads.length > 0){ 
+                    for(let j = 0; j < lim; j++) { %>
+                        <div class="unread border-top" id="notif-container<%=j%>">
+                                <div class="notif_header" data-bs-toggle="collapse" data-bs-target="#collapseOne<%=j%>" aria-expanded="true" aria-controls="collapseOne<%=j%>">
+
+                                    <div onClick="readNotification('<%=unreads[j]._id%>', '<%=j%>')"  class="px-3 d-flex align-items-center osahan-post-header">
+                                        <div class="dropdown-list-image mr-3">
+                                                <b class="fa <%=unreads[j].icon%> fa-2x rounded-circle file-icon"></b>
+                                        </div>
+                                        <div class="font-weight-bold mr-2">
+                                                <div class="text-truncate"><%=unreads[j].title%></div>
+                                                <div class="small" id="tmp_content<%=j%>"><%=unreads[j].content%></div>
+                                        </div>
+                                        <span class="ml-auto mb-auto">
+                        
+                                            <br/>
+                                            <div class="text-right text-muted pt-1"><%=Math.floor(Math.abs( new Date() - unreads[j].createdAt ) / (1000*3600*24))%>d</div>
+                                        </span>
+                                    </div>
+                        
+                            </div>
+                            <div id="collapseOne<%=j%>" class="collapse hide" data-bs-parent="#accordion">
+                                    <div class="row mt-0">
+                                        <div class="col d-flex justify-content-center mb-3">
+                                            <% if (unreads[j].title == "You have a new message.") { %>
+                                                <a href="/message?m=mesageId&p=causedByUserId" class="noti-lnk"> Read and reply message </a>
+                                                
+                                            <% } else if(usr.accountType == "user") { %>
+                                                <a href="/notification?n=<%=unreads[j]._id%>&p=<%=unreads[j].causedByUserId%>" class="noti-lnk"> Check provider profile </a>
+                                            <% } %>
+                                            <span class="ml-3 delete-noti" onClick="deleteUnreadAlert('<%=unreads[j]._id%>')">Delete alert</span> 
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                
+            <% } } %>
+                <input id="limit" class="d-none" value="6" >
+            </div>
+            <% if( lim != unreads.length  ){ %>
+                <div class="px-auto d-flex justify-content-center"><button type="button" onClick="loadMoreUnread()" class="btn btn-outline-success btn-sm mt-2 mb-2">Load More...</button></div>
+            <% } %>
+            </div>
+
+
+
+            <div class="box shadow-sm rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                    <h6 class="m-0">Earlier</h6>
+                </div>
+                <div class="box-body p-0"  id="readNotifs">
+                    <% if(reads.length > 0){ 
+                        for(let j = 0; j < rlim; j++) { %>
+                            <div class="p-3 d-flex align-items-center read border-bottom osahan-post-header">
+                                <div class="dropdown-list-image mr-3">
+                                    <b class="fa <%=reads[j].icon%> fa-2x rounded-circle file-icon"></b>
+                                </div>
+                                <div class="font-weight-bold mr-2">
+                                    <div class="text-truncate"><%= reads[j].title%></div>
+                                    <div class="small"><%= reads[j].content%></div>
+                                </div>
+                                <span class="ml-auto mb-auto">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-light btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" style>
+                                            <% if (reads[j].title == "You have a new message.") { %>
+                                                <a href="/message?m=mesageId&p=causedByUserId"> <button class="dropdown-item" type="button" ><i class="mdi mdi-message"></i>Read and reply message </button></a>
+                                                
+                                            <% } else { if(usr.accountType == "user") { %>
+                                                <a href="/notification?n=<%=reads[j]._id%>&p=<%=reads[j].causedByUserId%>" class="noti-lnk"><button class="dropdown-item" type="button" ><i class="mdi mdi-check"></i> Check provider profile </a>
+                                            <% } else if(usr.accountType == "provider") { %>
+                                                <a href="/notification?n=<%=reads[j]._id%>&p=<%=reads[j].causedByUserId%>" class="noti-lnk"><button class="dropdown-item" type="button" ><i class="mdi mdi-check"></i> View service request </a>
+                                            <% } } %> 
+                                            <button class="dropdown-item delete-noti" type="button" onClick="deleteReadAlert('<%=reads[j]._id%>')" ><i class="mdi mdi-close"></i> Delete alert</button>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="text-right text-muted pt-1"><%=Math.floor(Math.abs( new Date() - reads[j].createdAt ) / (1000*3600*24))%>d</div>
+                                </span>
+                            </div>
+                    <% } } %>
+            
+                </div>
+                <% if( rlim != reads.length  ){ %>
+                    <div class="px-auto d-flex justify-content-center"><button type="button" onClick="loadMoreRead()" class="btn btn-outline-success btn-sm mt-2 mb-2">Load More...</button></div>
+                <% } %>
+            </div>
+            </div>
+
+
+            
+    </div>
+
+
+   </div>
+
+</section>
+
+<script>
+
+function loadMoreUnread(){
+    const limit = document.getElementById("limit");
+    requestData = {
+        lim : limit.value,
+        status: "unread"
+    };
+
+    _postData('/notifications', requestData )
+      .then(async response => {
+        
+        if(response.status == 200){
+            let contnt = "";
+            let i = 0;
+            for(const noti of response.loadNotifs){
+                let partHtml2= "";
+
+                if (noti.title == "You have a new message.") { 
+                    partHtml2 = `<a href="/message?m=messageId&p=causedByUserId"><button class="dropdown-item" type="button"><i class="mdi mdi-delete"></i> Read message</button> </a>`;
+                } else { 
+                    partHtml2 = `<a href="/notification?n=${noti._id}&p=${noti.causedByUserId}"> Check provider profile </a>`;
+                }
+
+                let html = `
+                        <div class="notif_header" data-bs-toggle="collapse" data-bs-target="#collapseOne${i}" aria-expanded="true" aria-controls="collapseOne${i}">
+
+                            <div onClick="readNotification(${noti._id}, ${i})" class="px-3 d-flex align-items-center unread border-bottom osahan-post-header">
+                                <div class="dropdown-list-image mr-3"> <b class="fa ${noti.icon} fa-2x rounded-circle file-icon"></b>` +
+                        `</div>
+                                <div class="font-weight-bold mr-2">
+                                        <div class="text-truncate">${noti.title}</div>
+                                        <div class="small" id="noti-content">${noti.content}</div>
+                                </div>
+                                <span class="ml-auto mb-auto">
+                                    
+                                    <br/>
+                                    <div class="text-right text-muted pt-1">${response.ages[i]}d</div>
+                                </span>
+                            </div>
+
+                            <div id="collapseOne${i}" class="collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                                    <div class="row mt-0">
+                                        <div class="col d-flex justify-content-center mb-3">`+partHtml2+
+                                            `<span class="ml-3" onClick="deleteUnreadAlert(${noti._id})">Delete alert</span> 
+                                        </div>
+                                    </div>
+                            </div>
+                `;
+                i = i + 1;
+                contnt = contnt + html;
+            }
+            const newLimit = response.loadNotifs.length + 3;
+            contnt = contnt + `<input id="limit" class="d-none" value="${newLimit}" >`;
+            document.getElementById("unreadNotifs").innerHTML = contnt;
+            
+        }
+        
+      }).catch(err => {
+        console.log(err) // Handle errors
+      });
+
+    }
+
+
+function loadMoreRead(){
+    const limit = document.getElementById("limit");
+    requestData = {
+        lim : limit.value,
+        status: "read"
+    };
+
+    _postData('/notifications', requestData )
+      .then(async response => {
+        
+        if(response.status == 200){
+            let contnt = "";
+            let i = 0;
+            for(const noti of response.loadNotifs){
+                let partHtml2= "";
+                let partHtml3="";
+
+                if (noti.title == "A service provider has applied for your service request.") { 
+                    partHtml2 = `<a href="/notification?n=${noti._id}&p=${noti.causedByUserId}"> <button class="dropdown-item" type="button" ><i class="mdi mdi-check"></i> Check provider profile</button> </a>`;
+                } else if(noti.title == "You have a new message.") { 
+                    partHtml2 = `<a href="/message?m=messageId&p=causedByUserId"><button class="dropdown-item" type="button"><i class="mdi mdi-delete"></i> Read message</button> </a>`;
+                }
+
+                let html = `
+                <div class="p-3 d-flex align-items-center read border-bottom osahan-post-header">
+                                <div class="dropdown-list-image mr-3"> <b class="fa ${noti.icon} fa-2x rounded-circle file-icon"></b>`+
+                                    
+                                `</div>
+                                <div class="font-weight-bold mr-2">
+                                    <div class="text-truncate">${noti.title}</div>
+                                    <div class="small">${noti.content}</div>
+                                </div>
+                                <span class="ml-auto mb-auto">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-light btn-sm rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" style>
+                                            `+partHtml2+`
+                                            <button class="dropdown-item" type="button" onClick="deleteReadAlert(${noti._id})" ><i class="mdi mdi-close"></i> Delete alert</button>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="text-right text-muted pt-1">${response.ages[i]}d</div>
+                                </span>
+                            </div>
+                `;
+                i = i + 1;
+                contnt = contnt + html;
+            }
+            const newLimit = response.loadNotifs.length + 3;
+            contnt = contnt + `<input id="limit" class="d-none" value="${newLimit}" >`;
+            document.getElementById("readNotifs").innerHTML = contnt;
+            
+        }
+        
+      }).catch(err => {
+        console.log(err) // Handle errors
+      });
+
+    }
+
+async function _postData(url = '/read-notif', data = {}) {
+    const response = await fetch(url, {
+        method: 'POST',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(data)
+    });
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.indexOf("application/json") !== -1) {
+      return response.json();
+    }else{ return response;}
+}
+
+async function readNotification(notifId, id){
+    const notiContainer = document.getElementById("notif-container"+id);
+    requestData = {
+        _id: notifId,
+    };
+    _postData("/read-notif", requestData )
+      .then(async json => {
+        if(json.status == 200){
+            console.log(json.message);
+            notiContainer.classList.remove("unread");
+            notiContainer.classList.add("read");
+            //document.getElementById("tmp_content").innerHTML="";
+            //$("#unreadNotifs").load("/notifications #unreadNotifs");
+        }
+        else
+            console.log(json.message);
+        }).catch(err => {
+        console.log(err); 
+      });
+}
+
+async function deleteReadAlert(notifId){
+    requestData = {
+        _id: notifId,
+    };
+    _postData("/delete-notif", requestData )
+      .then(async json => {
+        if(json.status == 200){
+            console.log(json.message);
+            await new Promise(r => setTimeout(r, 500));
+            $("#readNotifs").load("/notifications #readNotifs");
+        }
+        else
+            console.log(json.message);
+        }).catch(err => {
+        console.log(err);
+      });
+}
+
+async function deleteUnreadAlert(notifId){
+
+requestData = {
+    _id: notifId,
+};
+_postData("/delete-notif", requestData )
+  .then(async json => {
+    if(json.status == 200){
+        console.log(json.message);
+        await new Promise(r => setTimeout(r, 500));
+        $("#unreadNotifs").load("/notifications #unreadNotifs");
+    }
+    else
+        console.log(json.message);
+    }).catch(err => {
+    console.log(err);
+  });
+}
+
+</script>
+
+<%- include('partials/footer') %>

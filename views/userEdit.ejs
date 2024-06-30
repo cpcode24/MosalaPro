@@ -1,0 +1,250 @@
+<%- include('partials/header') %>
+<section class="bg-light p-4 ">
+  <div class="container p-4">
+    <div class=" p-4">
+    <div class="h-100 pt-4 bg-drk">
+      <div class="container text-secondary "> 
+        <div class="row">
+          <div class="col-8">
+            <div class="container shadow-sm p-4 mb-5 bg-white rounded ">
+              <form action="/user-edit"  enctype="multipart/form-data" method="POST" class="mt-2">
+              <div class="row">
+                  <div class="col-4">
+                    <div
+                      id="photoBox"
+                      class="bg-image  w-100"
+                      style="
+                        background-image: url('/photo/<%=usr.photo %>');
+                        height: 300px;
+                      "
+                    ></div>
+                    <div class="d-flex justify-content-center mt-3">
+                      <label for="photoInput" class="custom-file-upload profile-btn simple-btn ">
+                        Upload Profile Picture</Picture>
+                      </label>
+                      <input type="file" id="photoInput" name="photo" style="display: none;" onchange="onPhotoChange()"/>
+                    </div>
+
+                  </div>
+                  <div class="col-8">
+                  
+                      <div class="d-flex justify-content-between w-100">
+                        <h5>Edit profile</h5>
+                        <div class="d-flex align-items-center ">
+
+                          <a href="/user" class="mr-3 simple-btn-inv">Back</a>
+                          <button type="submit" class="profile-btn simple-btn " >Save</button>
+                        </div>
+                      </div>
+                    
+                      <div class="row">
+                        <div class="col-md-6">
+                            <!-- First name input -->
+                            <div class="form-outline  ">
+                                <input type="text" id="registerFirstName" class="form-control" placeholder="First Name" name="firstName" value="<%=usr.firstName %>" required/>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Last name input -->
+                            <div class="form-outline">
+                                <input type="text" id="registerLastName" class="form-control" placeholder="Last Name" name="lastName" value="<%=usr.lastName %>"  required />
+                            </div>
+                        </div>
+                      </div>
+                    
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <!-- Email input -->
+                                <div class="form-outline">
+                                    <input type="email" id="registerEmail" class="form-control has-success" placeholder="Email" value="<%=usr.email %>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email"  required/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Phone input -->
+                                <div class="form-outline">
+                                  <input type="number" id="registerPhone" class="form-control" placeholder="Phone Number" name="phone" value="<%=usr.phone %>" pattern="/((\+*)((0[ -]*)*|(*))((\d{12})+|(\d{10})+))|\d{5}([- ]*)\d{6}/" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                          <div class="col-md-6">
+                              <!-- Email input -->
+                              <div class="form-outline">
+                                  <input id="facebookLink" class="form-control has-success" placeholder="Facebook profile link" type="url" name="facebook_link" />
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <!-- Phone input -->
+                              <div class="form-outline">
+                                <input id="linkedinLink" class="form-control" placeholder="LinkedIn Profile Link" name="linkedin_link" type="url"/>
+                              </div>
+                          </div>
+                      </div>
+                        <!-- Address input -->
+                        <div class="row mt-2">
+                            <div class="col">
+                                <div class="form-outline">
+                                  <input type="text" id="registerAddress" class="form-control" placeholder="Address" name="address" value="<%=usr.address %>" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <% if(usr.category)  {%>
+                          <div class="row mt-2">
+                            <div class="col">
+                                <div class="form-outline">
+                                  <input type="text" id="categoryId" class="form-control" placeholder="Category" name="category" value="<%=usr.category %>" readonly/>
+                                </div>
+                            </div>
+                          </div>
+                        <% } else { %>
+ 
+                        <div class="row mt-2">
+                          <div class="col">
+                              <select class="form-control" aria-label="Select Category" name="category" id="user-category" style="display: inline;">
+                                  <option selected>Select Category</option>
+          
+                                  <% if(cats){ cats.forEach(cat=>{ %>
+                                    <option value="<%=cat.name %>"><%=cat.name %></option>
+                                  <% });} %>
+                                </select>
+                          </div>
+                        </div>
+                        <% } if (usr.country) { %>
+                          <div class="row mt-2">
+                            <div class="col">
+                                <div class="form-outline">
+                                  <input type="text" id="location" class="form-control" placeholder="Location" name="location" value="<%=usr.country %> - <%=usr.city %>" readonly/>
+                                </div>
+                            </div>
+                          </div>
+                        <% } else { %>
+                        <div class="row mt-2">
+                          <div class="col-md-6">
+                              <!-- Country input -->
+                              <select name="country" id="country_search" class="form-control" aria-label="Select Country" value="<%=usr.firstName %>"style="display: inline;" required>
+                                  <option value="">Select Country</option>
+                                  <% countries.forEach(country => { %> 
+                                    <option value="<%= country.name %>"> <%= country.name %></option>
+                                    <% }); %>
+                                </select>
+                          </div>
+                          <div class="col-md-6">
+                              <!-- City input -->
+                              <select class="form-control" aria-label="Select City"  style="display: inline;" id="city_search" name="city" required>
+                                  <option>Select City</option>
+                                </select>
+                          </div>
+                      </div>
+                      <% } %>
+                      <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                              <input type="text" id="role" class="form-control has-success" placeholder="Role" value="<%=usr.role %>"  name="role" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                              <input type="number" id="rate" class="form-control" placeholder="Rate" name="rate" value="<%=usr.rate %>" />
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row mt-2">
+                        <div class="col-md-12">
+                            <div class="form-outline">
+                                <textarea rows="5" type="text" id="description" class="form-control has-success" placeholder="Description" name="description"><%=usr.description %></textarea>
+                            </div>
+                        </div>
+                      </div>
+                      <input type="hidden" id="skillsForm" class="form-control" placeholder="Address" name="skills" value="" required/>
+                      <!-- <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-outline  ">
+                                  <input type="password" id="registerPassword" class="form-control" placeholder="New Password" name="password" />
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-outline  ">
+                                  <input type="password" id="registerConfPassword" class="form-control" placeholder="Confirm new Password"  name="cpassword" />
+                              </div>
+                          </div>
+                      </div> -->
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="container shadow-sm mb-5 bg-white rounded ">
+              <div class="row">
+                <div class="p-3 w-100 d-flex justify-content-between border-bottom border-dark">
+                  <h5>Portfolio Items</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="container shadow-sm mb-5 pb-1 bg-white rounded ">
+              <div class="row">
+                <div class="w-100 d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+                  <h6>Verification</h6>
+                </div>
+              </div>
+                <div class="d-flex justify-content-between align-items-center my-3">
+                  <span>Preferred Freelancer</span>
+                  <span class="text-primary">Join</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center my-3">
+                  <span>Identity Verified</span>
+                  <span class="text-primary">Verify</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center my-3">
+                  <span>Payment Verified</span>
+                  <span class="text-primary">Verify</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center my-3">
+                  <span>Email Verified</span>
+                  <span class="text-primary">Verify</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center my-3">
+                  <span>Facebook Verified</span>
+                  <span class="text-primary">Verify</span>
+                </div>
+              <p></p>
+            </div>
+            <div class="container shadow-sm mb-5 pb-3 bg-white rounded ">
+              <div class="row">
+                <div class="w-100 d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+                  <h6>Certifications</h6>
+                </div>
+              </div>
+              <p class="text-center">You don't have any certifications yet.</p>
+            </div>
+            <div class="container shadow-sm mb-5 pb-3 bg-white rounded ">
+              <div class="row">
+                <div class="w-100 d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+                  <h6>Skills</h6>
+                  <button type="button" class="profile-btn simple-btn " onClick="addNewSkill();">Add skill</button>
+                </div>
+              </div>
+              <div id="skillBox">
+                <div id="skillsData" data-skills=<%= usr.skills %>></div>
+                <% usr.skills.forEach(skill => { %> 
+                  
+                  <div class="d-flex justify-content-between my-2">
+                    <p><%= skill %></p>
+                    <img style=" width: 15px; height: 15px;" title="Delete skill" data-placement="top" src="images/icons8-delete-20.png"  onClick="removeSkill(this, '<%= skill %>');" )  />  
+                  </div>
+                <% }); %>
+              </div>
+              <div class="form-outline pt-3">
+                <input type="text" id="inputSkill" class="form-control" placeholder="Skill"  name="skill"/>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+  </section>
+
+  <script src="js/userEdit.js"></script>
+
+<%- include('partials/footer') %>

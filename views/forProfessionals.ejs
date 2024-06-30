@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<section class="parallax-container for-pro-banner" data-parallax-img="images/bg5.jpg">
+    <div class="parallax-content section-xl context-dark text-center">
+      <div class="container p-4 mb-0">
+        <h2><span  class="text-light" data-caption-animate="fadeInDown" data-caption-delay="100">Connect With Millions of Potential</span> <span class="title" data-caption-animate="fadeInUp" data-caption-delay="200"> Customers Nearby.</span></h2>
+            <p class="big">We love helping service providers save their reputations and grow their businesses by providing customers service on their behalf.</p>
+            <% if(usr){ %>
+              <a class="button button-secondary-text" href="/join-as-pro" >Join as Provider</a>
+            <% } else { %>
+              <a class="button button-secondary-text" href="#proSignModalCta" data-toggle="modal" data-caption-animate="fadeInUp">Join as Provider</a>
+              <% } %>
+      </div>
+    </div>
+  </section>
+  <%- include('partials/jobCategories') %>
+  <%- include('partials/proSample') %>
+  <%- include('partials/proTestimonials') %>
+  <%- include('partials/packages') %>
+  
+  <section class="section box-image-left for-pro">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12 wow fadeInLeft">
+          <div class="section-lg section-lg-top-100 mx-3">
+            <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-post"></span><span><br>Easier way <br><span class="text-light"> to manage customers.</span></span></h2>
+            <p class="big text-secondary ">  If you have experience as a professional service provider and can offer quality work, then get in contact with us today.
+                Create a profile that customers can view and book your services through. For a small monthly cost, your profile will be presented to those in need of your services. Access
+                an easier way to manage your clients with online bookings. Keep records, manage dates, and plot
+                out your weekly and monthly services with MosalaPro.</p>
+                <% if(usr){ %>
+                  <a class="button button-secondary-text d-flex justify-content-center align-items-center mx-4" href="/join-as-pro" >Join as Provider</a>
+                <% } else { %>
+                  <a class="button button-secondary-text d-flex justify-content-center align-items-center mx-4" href="#proSignModalCta" data-toggle="modal" data-caption-animate="fadeInUp">Join as Provider</a>
+                <% } %>
+                </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-image-item box-image-video novi-background bg-image" style="background-image: url(images/people-with-customer-service-concept-illustration-vector.png)"></div>
+  </section>
+  <%- include('partials/providerSignupModal') %>
+  <%- include('partials/footer') %>
+  

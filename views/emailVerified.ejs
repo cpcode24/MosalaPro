@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+<section class="section verify-section">
+  <div class="container ">
+    <div class="row">
+        <div class="col">
+            <img class="text-center "src="images/success.png" style="width: 4em; height: 4em; position: relative; justify-content: center;"/>
+            <h5 class="text-center text-light">Email verified successfully!</h5>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <p class="title text text-center">Your email has been verified, your account is active. please login below.</p> 
+                <form action="/login-u" method="post">
+                    
+                    <div class="row">
+                    <div class="col-md-6">
+                        <!-- Email input -->
+                        <div class="form-outline ">
+                            <input type="email" id="loginEmail" class="form-control" placeholder="Email" name="username"  autocomplete="on" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Password input -->
+                        <div class="form-outline">
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Password" name="password" autocomplete="on"  required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 justify-content-center">
+                                <!-- Submit button -->
+                                <button type="submit" class="btn button-primary btn-block mb-4" name="login-u">Login</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+         </div>
+    </div>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>

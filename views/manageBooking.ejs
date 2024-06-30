@@ -1,0 +1,110 @@
+<%- include('partials/header') %>
+<section class="bg-light h-100 p-4 ">
+  <div class="container pt-4">
+        <div class="row">
+          <div class="col pt-4">
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item"><a href="/mybookings">Bookings</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><%=booking.bookingTitle%></li>
+              </ol>
+          </nav>
+
+              <div class="row">
+                 
+                  <div class="col-lg-8 col-md-12 col-sm-12 col">
+                    <div class="container shadow-sm p-4 bg-white rounded mb-4">
+                      <div class="d-flex justify-content-between w-100 p-4">
+                        <h5>Booking: <%=booking.bookingTitle%></h5>
+                        <span id="booking-msg"></span>
+                      </div>
+
+                      <div class="modal-container-job px-4">
+                        <input class="d-none" id="jobId" value="<%=job._id%>">
+                        <input class="d-none" id="userName" value="<%=job.username%>">
+                        <span id="mess" class="error_message"></span>
+                        <div class="row  mt-2">
+                            <div class="col">
+                                <span class="job-details pl-2 mt-4"><b>Category:</b> category</span> 
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <span class="job-details pl-2 mt-4"><b>Budget:</b> $ <%=booking.budget%></span>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col">
+                                <span class="job-details pl-2 mt-4"><b>Deadline:</b> <%=booking.deadline%></span>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col">
+                                <span class="job-details pl-2"><b>Description: </b><%=booking.bookingDescription%></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="border-bottom mb-3">Files</h6>
+                            </div>
+                        </div>
+                        
+                        <div class="row border-bottom p-3 mt-1">
+                            
+                           
+                            </div>
+                            <p class="post-modern-text mt-1 mb-4">Please read the documents carefully to make sure to meet the requirements of this request.</p>
+                        </div>
+                        <% if(booking.status == "active") { %>
+                        <div class="d-flex justify-content-center mt-3 mb-4">
+                          <a href="#cancelBookingConfModalCta" data-toggle="modal" data-caption-animate="fadeInUp"><button class="btn-job btn-primary-job-inv-dgr mr-3" >Cancel booking</button></a>
+                          <a href="#confBookingModalCta" data-toggle="modal" data-caption-animate="fadeInUp" ><button class="btn-job btn-primary-job" >Confirm booking</button></a>
+                          <a href="#quotationModalCta" data-toggle="modal" data-caption-animate="fadeInUp"> <button class="btn-job btn-primary-job-inv-blue tooltips ml-3" title="If you are not satisfied with the budget, you can provide your quote for this request." 
+                            data-toggle="tooltip" data-placement="top" 
+                             >Provide a quote</button></a>
+                             
+                        </div>
+                        <% } else if (booking.status == "in-progress") { %>
+                          <div class="d-flex justify-content-center mt-3 mb-4">
+                            <a href="#confBookingCompleteModalCta" data-toggle="modal" data-caption-animate="fadeInUp" ><button class="btn-job btn-primary-job" >Complete Job and Submit</button></a>
+                            <a href="#requestExtensionModalCta" data-toggle="modal" data-caption-animate="fadeInUp"> <button class="btn-job btn-primary-job-inv-blue tooltips ml-3" title="If you can't meet the deadline, you can request an extension." 
+                              data-toggle="tooltip" data-placement="top" 
+                               >Request deadline extension</button></a>
+                               
+                          </div>
+
+                        <% } %>
+                      </div>
+                </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col">
+            <div class="container shadow-sm mb-5 pb-1 bg-white rounded ">
+              <div class="row">
+                <div class="w-100 d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+                  <h6>Service booked by</h6>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center mt-2 p-4">
+                <div class="thumb-lg member-thumb mr-4"><img src="/photo/<%= customer.photo %>" alt="profile-image"></div>
+                      <span class="my-auto"><%= customer.firstName %> <%= customer.lastName %> <br> <span><%= customer.username %></span></span>
+                      
+                
+                </div>
+
+              </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      </div>
+  </section>
+
+  <%- include('partials/cancelBookingConfModal') %>
+  <%- include('partials/confirmBookingModal') %>
+  <%- include('partials/bookingQuotationModal') %>
+  <%- include('partials/confBookingCompleteModal') %>
+  <script src="js/manageBookingHandler.js"></script>
+
+  <%- include('partials/footer') %>

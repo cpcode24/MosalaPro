@@ -1,0 +1,279 @@
+<%- include('partials/header') %>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+<section class="bg-light post-request-section">
+    <div class="container ">
+            <div class="tab">
+                <div class="tab-pane" id="request-desc">
+                    <div class="card-header border-bottom mt-4 p-4 d-flex d-md-none">
+                        <ul class="nav nav-gap-x-1" role="tablist">
+                            <li class="nav-item">
+                                <h6 class="numbering">1</h6><h6 class=" d-inline nav-link has-icon">Brief description </h6>
+                            </li>
+                            <li class="nav-item">
+                                <svg width="8" height="16" viewBox="0 0 8 16" xmlns="http://www.w3.org/2000/svg"><path d="M0.772126 1.19065L0.153407 1.80934C0.00696973 1.95578 0.00696973 2.19322 0.153407 2.33969L5.80025 8L0.153407 13.6603C0.00696973 13.8067 0.00696973 14.0442 0.153407 14.1907L0.772126 14.8094C0.918563 14.9558 1.156 14.9558 1.30247 14.8094L7.84666 8.26519C7.99309 8.11875 7.99309 7.88131 7.84666 7.73484L1.30247 1.19065C1.156 1.04419 0.918563 1.04419 0.772126 1.19065Z"></path></svg>
+                            </li>
+                            <li class="nav-item ml-3">
+                                <h6 class="numbering">2</h6><h6 class=" d-inline nav-link has-icon">Timeline </h6>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="row-service ">
+                        <div class="col-md-6 col-sm-12 col-12 mb-3">
+                            <h3>Describe your project <br> or task to <%=pro.firstName %>.</h3>
+                            <h6 class="text-light mt-2">Provide <%=pro.firstName %> with a brief description of your project/task.</h6>
+                            <img src="images/Project_desc.png" class="service-image" alt="image">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 col-with-input">
+                            <input type="hidden" name="username" id="username" value="<%= usr.username %>" class="input-field-input">
+
+                            <h6 class="mt-4 mb-1"> Title of the project/task</h6>
+                            <span>Keep it short and simple - this will help us match you to the right category. </span> 
+                                <input type="text" id="requestTitle" name="requestTitle" class="input-field-input" oninput="this.className = 'input-field-input'"
+                                    placeholder="Example- create a wordPress website for my company" >
+                                <span class="char-limit">0/70</span> 
+                    
+
+                            <h6 class="mt-4 mb-1">What are you looking to get done?</h6>
+                            <span>This will help get your brief to the right talent. <b>Enter at least 20 characters.</b> </span> 
+                            <div class="input-field">
+                                <textarea type="text" id="requestDescription" class="input-field-textarea" name="requestDescription" oninput="this.className = 'input-field-textarea'"
+                                    placeholder="I need...."  ></textarea> 
+                            </div>
+                            <label for="file-input" class="attach-btn">
+                                <i class="fas fa-paperclip"></i> Attach requirement documents
+                            </label>
+                            <input id="file-input" name="file" type="file" style="display: none;" >
+
+                           
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="tab-pane" id="requet-desc">
+                    <div class="card-header border-bottom mt-4 p-4 d-flex d-md-none">
+                        <ul class="nav nav-gap-x-1" role="tablist">
+                            <li class="nav-item">
+                                <b class="numbering fa fa-check" aria-hidden="true"></b><h6 class=" d-inline nav-link has-icon">Brief description </h6>
+                            </li>
+                            <li class="nav-item">
+                                <svg width="8" height="16" viewBox="0 0 8 16" xmlns="http://www.w3.org/2000/svg"><path d="M0.772126 1.19065L0.153407 1.80934C0.00696973 1.95578 0.00696973 2.19322 0.153407 2.33969L5.80025 8L0.153407 13.6603C0.00696973 13.8067 0.00696973 14.0442 0.153407 14.1907L0.772126 14.8094C0.918563 14.9558 1.156 14.9558 1.30247 14.8094L7.84666 8.26519C7.99309 8.11875 7.99309 7.88131 7.84666 7.73484L1.30247 1.19065C1.156 1.04419 0.918563 1.04419 0.772126 1.19065Z"></path></svg>
+                            </li>
+                            <li class="nav-item ml-3">
+                                <h6 class="numbering">2</h6><h6 class=" d-inline nav-link has-icon">Timeline </h6>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row-service ">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                            <h3>Tell <%=pro.firstName %> how soon you  <br> want your project done...</h3>
+                            <h6 class="text-light mt-2 pr-4">Give <%=pro.firstName %> an approximate deadline for your project. How soon do you want it done.</h6>
+                            <img src="/images/deadline_simple.png" class="service-image"
+                                alt="image">
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 col-with-input">
+                            <h6 class="mb-2">The budget I have for this is.. </h6> 
+                            <input type="number" placeholder="$" id="requestBudget" class="form-control" name="requestBudget" oninput="this.className = 'input-field-input'">
+
+                                <h6 class="mt-3 mb-2">I need it done by.. </h6> 
+                                <div class="form-group mb-4">
+                                    <div class="datepicker date input-group p-0 shadow-sm">
+                                        <input placeholder="Select date" id="datepicker" name="requestDeadline">
+                                        <!--div class="input-group-append"><span class="input-group-text px-4"><b class="fas fa-calendar"></b></span></div-->
+                    
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab">
+                <div class="tab-pane" id="requet-desc">
+                    <div class="card-header border-bottom mt-4 p-4 d-flex d-md-none">
+                        <ul class="nav nav-gap-x-1" role="tablist">
+                            <li class="nav-item">
+                                <b class="numbering fa fa-check" aria-hidden="true"></b><h6 class=" d-inline nav-link has-icon">Brief description </h6>
+                            </li>
+                            <li class="nav-item">
+                                <svg width="8" height="16" viewBox="0 0 8 16" xmlns="http://www.w3.org/2000/svg"><path d="M0.772126 1.19065L0.153407 1.80934C0.00696973 1.95578 0.00696973 2.19322 0.153407 2.33969L5.80025 8L0.153407 13.6603C0.00696973 13.8067 0.00696973 14.0442 0.153407 14.1907L0.772126 14.8094C0.918563 14.9558 1.156 14.9558 1.30247 14.8094L7.84666 8.26519C7.99309 8.11875 7.99309 7.88131 7.84666 7.73484L1.30247 1.19065C1.156 1.04419 0.918563 1.04419 0.772126 1.19065Z"></path></svg>
+                            </li>
+                            <li class="nav-item ml-3">
+                                <b class="numbering fa fa-check" aria-hidden="true"></b><h6 class=" d-inline nav-link has-icon">Timeline </h6>
+                            </li>
+                        </ul>
+                        <input type="hidden" id="proId" value="<%= pro._id%>" class="input-field-input">
+                    </div>
+                    <div class="row-service">
+                        <div class="col mt-2 mb-3" >
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <h3 class="mx-auto"> Your service request has been successfully sent to <%=pro.firstName%>!</h3>
+                                <img  src="/images/done.png" class="service-image p-4 mx-auto"
+                                    alt="image">
+                                <h6 class="text-light mt-2 pr-4 mt-4 mx-auto">Your service request has been submitted. We will let <%=pro.firstName%> know about your request.</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-end mb-3">
+                <p></p>
+                <button type="button" class="button button-primary mr-4"  id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                <button type="button" class="button button-primary ml-4"  id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+            
+    </div>
+</section>
+
+<script>
+$('#datepicker').datepicker({ 
+    uiLibrary: 'bootstrap4'
+}); 
+
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form ...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  // ... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 2)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else if(n == (x.length - 1)){
+    document.getElementById("prevBtn").style.display = "none";
+    document.getElementById("nextBtn").innerHTML = "Start a new request";
+  }
+   else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  // ... and run a function that displays the correct step indicator:
+  fixStepIndicator(n);;
+}
+
+async function nextPrev(n) {
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // This function will figure out which tab to display
+  if ((currentTab+n) == x.length-1) {
+    //...the form gets submitted:
+    const requestDeadline = document.getElementById("datepicker").value;
+    const currentDate = new Date();
+    const dateArr = currentDate.toLocaleDateString("en-US").split("/");
+    const rqDateArr= requestDeadline.split("/");
+    const err_msg = document.getElementById("err_msg");
+    if((parseInt(rqDateArr[0]) < parseInt(dateArr[0])) || 
+        (parseInt(rqDateArr[1]) <= parseInt(dateArr[1])) || 
+        (parseInt(rqDateArr[2]) < parseInt(dateArr[2]))){
+        err_msg.classList.add("error_message");
+        err_msg.innerHTML = "Invalid deadline. Enter a date in future for our providers to meet your deadline.";
+        await new Promise(r => setTimeout(r, 3500));
+        err_msg.innerHTML = "";
+        return  false;
+    }
+    else
+        onSubmit();
+  }
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form... :
+  if (currentTab > x.length-1) {
+    window.location.reload();
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, z, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "" && y[i].name != "file") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false:
+      valid = false;
+    }
+  }
+  z = document.getElementById("requestDescription");
+  if ( z.value == "" || z.value.length < 20){
+    z.className += " invalid";
+    valid = false;
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class to the current step:
+  x[n].className += " active";
+}
+
+
+async function onSubmit() {
+  
+  const requestTitle = document.getElementById("requestTitle").value;
+  const requestDescription = document.getElementById("requestDescription").value;
+  const files = document.getElementById("file-input").files[0];
+  const username = document.getElementById("username").value;
+  const requestDeadline = document.getElementById("datepicker").value;
+  const requestBudget = document.getElementById("requestBudget").value;
+  const providerId = document.getElementById("proId").value;
+
+  const formData = new FormData();
+
+  formData.append("bookingTitle", requestTitle);
+  formData.append("bookingDescription", requestDescription);
+  formData.append("files", files);
+  formData.append("username", username);
+  formData.append("bookingDeadline", requestDeadline);
+  formData.append("bookingBudget", requestBudget);
+  formData.append("providerId", providerId);
+
+  await fetch("/submitBooking", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // handle successful response
+      console.log("successful response ", data);
+    })
+    .catch((error) => {
+      // handle error
+      console.log("error ", error);
+    });
+}
+
+    
+</script>
+<%- include('partials/footer') %>
+

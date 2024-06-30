@@ -1,0 +1,150 @@
+<%- include('partials/header') %>
+
+<section class="bg-light p-4">
+   <div class="container p-4">
+    <div class="pt-4">
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/myrequests">My requests</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Invoice</li>
+            </ol>
+        </nav>
+    </div>
+        <div class="invoice-content">
+            <div class="container bootstrap snippets bootdey">
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <div class="invoice-wrapper" id="invoice-container">
+                            <div class=" d-flex justify-content-between">
+                                <div class="intro">Hi <strong><%=usr.firstName%>  <%=usr.lastName%></strong>,
+                                <br>
+                                This is the invoice for a payment of <strong>$ <%=((0.07 * job.budget)+ (0.05 * job.budget)+ job.budget)%></strong> (USD) for your service request.</div>
+                                <div><img class="" src="images/mosalapro-logo-h.png" alt="" width="100" height="20"/></div>
+                            </div>
+                            <div class="payment-info">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span>Invoice No.</span>
+                                        <strong>434334343</strong>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <span>Invoice Date</span>
+                                        <strong>Jul 09, 2014 - 12:20 pm</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-details">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span>User</span>
+                                        <strong class="text-primary">
+                                            <%=usr.firstName%>  <%=usr.lastName%>
+                                        </strong>
+                                        <p>
+                                            <%=usr.address%><br>
+                                            <%=usr.city%>,  <%=usr.country%><br>
+                                            <a href="#">
+                                            <span class="__cf_email__" data-cfemail="88e2e7e6e6f1ecedeeeec8efe5e9e1e4a6ebe7e5"><%=usr.email%></span>
+                                            </a>
+                                        </p>
+                                    </div>
+                                <div class="col-sm-6 text-right">
+                                <span>Service Provider</span>
+                                <strong class="text-primary">
+                                    <%=pro.firstName%>  <%=pro.lastName%>
+                                </strong>
+                                <p>
+                                    <%=pro.address%><br>
+                                    <%=pro.city%>,  <%=pro.country%><br>
+                                    <a href="#">
+                                        <span class="__cf_email__" data-cfemail="cfa5baaea1a9aabd8fa8a2aea6a3e1aca0a2"><%=pro.email%></span>
+                                    </a>
+                                </p>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="line-items">
+                            <div class="headers clearfix">
+                                <div class="row">
+                                    <div class="col-4">Service</div>
+                                    <div class="col-3 text-center">Quantity</div>
+                                    <div class="col-5 text-right">Amount</div>
+                                </div>
+                            </div>
+                            <div class="items">
+                            <div class="row item">
+                            <div class="col-4 desc">
+                                <%=job.requestTitle%>
+                            </div>
+                            <div class="col-3 qty ">
+                                1
+                            </div>
+                            <div class="col-5 amount text-right">
+                                $ <%=job.budget%>
+                            </div>
+                            </div>
+                            
+                           
+                            </div>
+                            <div class="total text-right">
+                            <p class="extra-notes">
+                            <strong>Extra Notes</strong>
+                            Please submit payment for the total amount so the provider can start working on this request.
+                            We appreciate your business.
+                            </p>
+                            <div class="field">
+                            Subtotal <span>$ <%=job.budget%></span>
+                            </div>
+                            <div class="field">
+                            Online fees <span>$ <%=(0.05 * job.budget)%></span>
+                            </div>
+                            <div class="field">
+                            Tax <span>$ <%=(0.07 * job.budget)%></span>
+                            </div>
+                            <div class="field grand-total">
+                            Total <strong><span>$ <%=((0.07 * job.budget)+ (0.05 * job.budget)+ job.budget)%></span></strong>
+                            </div>
+                            </div>
+                            <div class=" d-flex justify-content-center mt-4" id="ignorePDF">
+                                <div class="print mr-3" id="btnPrint" onClick="getInvoicePDF('<%=job._id%>')">
+                                    <a href="#"><b class="fa fa-print mr-1"></b> Print this invoice</a>
+                                </div>
+
+                                <div class="pay">
+                                    <a href="#">
+                                        <b class="fa fa-credit-card mr-1"></b> Submit payment for invoice
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</section>
+<script src="js/invoice.js"></script>
+
+<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#btnPrint").live("click", function () {
+        var divContents = $("#invoice-container").html();
+        var printWindow = window.open('', '', 'height=600,width=1000');
+        printWindow.document.write(`<html><head><title>Invoice</title>
+            <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900">
+            <link rel="stylesheet" href="css/bootstrap.css">
+            <link rel="stylesheet" href="css/invoice.css">
+            <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />`);
+        printWindow.document.write('</head><body >');
+        printWindow.document.write(divContents);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    });
+</script-->
+
+<%- include('partials/footer') %>

@@ -1,0 +1,30 @@
+const mongoose = require("mongoose");
+
+const messageSchema = new mongoose.Schema({
+  senderId: {
+    type: String,
+    required: true
+  },
+  recipientId: {
+    type: String,
+    required: true
+  },
+  title: String,
+  content: {
+    type: String,
+    min: 7
+  },
+  status: {
+    type: String,
+    default: "unread",
+  },
+  createdAt: Date
+
+});
+
+messageSchema.plugin(require("passport-local-mongoose"));
+messageSchema.plugin(require("mongoose-findorcreate"));
+
+const MessageModel = mongoose.model("Message", messageSchema);
+
+module.exports = MessageModel;

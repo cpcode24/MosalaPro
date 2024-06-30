@@ -1,0 +1,93 @@
+<%- include('partials/header') %>
+<section class="parallax-container" data-parallax-img="images/banner_pro_bgc.png">
+  <div class=" mt-4 p-4">
+    <div class="row justify-content-center ">
+      <div class="col-lg-5 text-center">
+      <a href="index.html">
+      <img src="assets/img/svg/logo.svg" alt="">
+      </a>
+      <div class="card mt-5">
+      <div class="card-body py-5 px-lg-5">
+      <div class="svg-icon svg-icon-xl-ver text-purple">
+      <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>ionicons-v5-g</title><path d="M336,208V113a80,80,0,0,0-160,0v95" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path><rect x="96" y="208" width="320" height="272" rx="48" ry="48" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></rect></svg>
+      </div>
+      <h3 class="fw-normal text-dark mt-4-ver">
+      Email verification
+      </h3>
+      <p class="mt-4-ver mb-1">
+      An email with a verification code has been sent to <%= email %>.
+      </p>
+      <p>
+      Please enter the code in the field below.
+      </p>
+      <div  class="d-flex flex-column justify-content-center align-items-center"> 
+        <span name="e_message" id="e_message" class="error_message "> </span>
+      </div>
+      <!--form action="/verify-email" method="post"-->
+        <div class="row mt-4-ver pt-2">
+
+            <div class="col">
+              <input type="text" name="first" id="first" class="form-control form-control-ver form-control-lg-ver text-center py-4" 
+                oninput="this.className = 'form-control form-control-ver form-control-lg-ver text-center py-4'" maxlength="1" autofocus="" required>
+            </div>
+            <div class="col">
+              <input type="text" name="second" id="second" class="form-control form-control-ver form-control-lg-ver text-center py-4" 
+                oninput="this.className = 'form-control form-control-ver form-control-lg-ver text-center py-4'" maxlength="1" required>
+            </div>
+            <div class="col">
+              <input type="text" name="third" id="third" class="form-control form-control-ver form-control-lg-ver text-center py-4 " 
+                oninput="this.className = 'form-control form-control-ver form-control-lg-ver text-center py-4'" maxlength="1" required>
+            </div>
+            <div class="col">
+              <input type="text" name="fourth" id="fourth" class="form-control form-control-ver form-control-lg-ver text-center py-4 "
+              oninput="this.className = 'form-control form-control-ver form-control-lg-ver text-center py-4'" maxlength="1" required>
+            </div>
+            <div class="col">
+              <input type="text" name="fifth" id="fifth" class="form-control form-control-ver form-control-lg-ver text-center py-4 " 
+              oninput="this.className = 'form-control form-control-ver form-control-lg-ver text-center py-4'" maxlength="1" required>
+            </div>
+            <div class="col">
+              <input type="text" name="sixth" id="sixth" class="form-control form-control-ver form-control-lg-ver text-center py-4" 
+              oninput="this.className = 'form-control form-control-ver form-control-lg-ver text-center py-4'"maxlength="1" required>
+            </div>
+          </div>
+          <input type="submit" class="btn button-primary btn-lg w-100 hover-lift-light mt-4-ver"  onClick="verifyCode('<%=redirect_link%>', '<%=userId%>')" value="Verify my account" required>
+      <!--/form-->
+        
+     
+      </div>
+      </div>
+      
+      <p class="text-center text-muted mt-4-ver">
+      Didn't receive verification email?
+        <span id="resend_code" class="fake_link" onClick="resendCode('<%=redirect_link%>', '<%=userId%>')">
+      Resend code
+      </span>
+      </p>
+      </div>
+      </div>
+    
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="js/verifyEmail.js"></script>
+ <script>
+  var currentBoxNumber = 0;
+  
+  $(".form-control").keyup(function (event) {
+      //if (event.keyCode == 13) {
+          textboxes = $("input.form-control");
+          currentBoxNumber = textboxes.index(this);
+          //console.log(textboxes.index(this));
+          if (textboxes[currentBoxNumber + 1] != null) {
+              nextBox = textboxes[currentBoxNumber + 1];
+              nextBox.focus();
+              nextBox.select();
+              event.preventDefault();
+              return false;
+          } 
+      //}
+  });
+ </script>
+
+    <%- include('partials/footer') %>

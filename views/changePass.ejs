@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+<section class="parallax-container" data-parallax-img="images/banner_pro_bgc.png">
+  <div class=" mt-4 p-4">
+    <div class="row justify-content-center ">
+      <div class="col-lg-5 text-center">
+      <a href="index.html">
+      <img src="assets/img/svg/logo.svg" alt="">
+      </a>
+      <div class="card mt-5">
+      <div class="card-body py-5 px-lg-5">
+      <div class="svg-icon svg-icon-xl-ver text-purple">
+      <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>ionicons-v5-g</title><path d="M336,208V113a80,80,0,0,0-160,0v95" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path><rect x="96" y="208" width="320" height="272" rx="48" ry="48" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></rect></svg>
+      </div>
+      <h3 class="fw-normal text-dark mt-4-ver">
+      Change your passsword
+      </h3>
+      <p>
+      Please enter your new password in the field below.
+      </p>
+      
+      <!--form action="/verify-email" method="post"-->
+      <div class="form-group px-4">
+        <span class="error_message" id="e_message" name="e_message" class="error_message"></span>
+        <label class="d-block">Change Password</label>
+        <input type="password" id="newPass_" class="form-control mt-2" placeholder="New password">
+        <input type="password" id="newPassConf_" class="form-control mt-3" placeholder="Confirm new password">
+        <span class="small mt-2">Use a strong password that includes special characters and numbers.</span>
+        <input type="submit" class="btn button-primary btn-lg w-100 hover-lift-light mt-4-ver " onClick="updatePassword('<%=userId%>')" value="Update password" required>
+        </div>
+      <!--/form-->
+        
+     
+      </div>
+      </div>
+      
+      </div>
+      </div>
+    
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="js/changePassword.js"></script>
+<%- include('partials/footer') %>
+
+

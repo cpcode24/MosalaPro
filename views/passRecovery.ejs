@@ -1,0 +1,68 @@
+<%- include('partials/header') %>
+<section class="parallax-container" data-parallax-img="images/banner_pro_bgc.png">
+  <div class=" mt-4 p-4">
+    <div class="row justify-content-center ">
+      <div class="col-lg-5 text-center">
+      <a href="index.html">
+      <img src="assets/img/svg/logo.svg" alt="">
+      </a>
+      <div class="card mt-5">
+      <div class="card-body py-5 px-lg-5">
+      <div class="svg-icon svg-icon-xl-ver text-purple">
+      <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><title>ionicons-v5-g</title><path d="M336,208V113a80,80,0,0,0-160,0v95" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></path><rect x="96" y="208" width="320" height="272" rx="48" ry="48" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></rect></svg>
+      </div>
+      <h3 class="fw-normal text-dark mt-4-ver">
+      Recover Your Password
+      </h3>
+      <span name="recov_message" id="recov_message" class="error_message "> </span>
+      <p class="mt-4-ver mb-1">
+      Please enter the email address associated with your account to recover and change your password. 
+      </p>
+        <div class="px-lg-5">
+            <div class="row mt-2 px-4">
+              <div class="col">
+                  <!-- Email input -->
+                  <div class="form-outline ">
+                      <input type="email" id="recover_email" class="form-control" placeholder="Email" name="recover_email"  autocomplete="on" required/>
+                  </div>
+              </div>
+            </div>
+           
+          <div class="row mt-2 px-4">
+            <div class="col">
+                        <!-- Submit button -->
+                    <button type="submit" class="btn btn-block simple-btn big p-2 mb-2" name="recover-p" onClick="onPassRecoverSubmit()" >Submit</button>
+            </div>
+          </div>
+        </div>
+      <div  class="d-flex flex-column justify-content-center align-items-center"> 
+        <span>New here?  <a class="text-primary" href="#regModalCta" data-toggle="modal" data-dismiss="modal" data-caption-animate="fadeInUp">Create an account</a></span>
+      </div>
+      
+      </div>
+      </div>
+    
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="js/passRecovery.js"></script>
+ <script>
+  var currentBoxNumber = 0;
+  
+  $(".form-control").keyup(function (event) {
+      //if (event.keyCode == 13) {
+          textboxes = $("input.form-control");
+          currentBoxNumber = textboxes.index(this);
+          //console.log(textboxes.index(this));
+          if (textboxes[currentBoxNumber + 1] != null) {
+              nextBox = textboxes[currentBoxNumber + 1];
+              nextBox.focus();
+              nextBox.select();
+              event.preventDefault();
+              return false;
+          } 
+      //}
+  });
+ </script>
+
+    <%- include('partials/footer') %>
